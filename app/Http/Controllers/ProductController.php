@@ -15,12 +15,12 @@ class ProductController extends Controller
         $data = $request->all();
         $query = Product::with('category');
         
-        if ($data['search']) {
+        if (isset($data['search']) && $data['search']) {
             $query = $query->where('name', 'like', '%'.$data['search'].'%');
             $query = $query->orWhere('description', 'like', '%'.$data['search'].'%');
         }
 
-        if ($data['category_id']) {
+        if (isset($data['category_id']) && $data['category_id']) {
             $query = $query->where('category_id', $data['category_id']);
         }
 
